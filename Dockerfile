@@ -1,11 +1,11 @@
 FROM golang:1.21.0 AS builder
 
-RUN mkdir hello && cd hello
+RUN mkdir hello
 COPY hello.go /go/hello
-CMD [ "go", "run", "/go/hello/hello.go" ]
+RUN cd hello && go build -ldflags '-s -w' /go/hello/hello.go
 
 
-FROM golang:1.21.0-alpine
+FROM scratch
 WORKDIR /go/hello
 COPY --from=builder /go/hello .
-CMD [ "go", "run", "/go/hello/hello.go" ]
+CMD [ "./hello" ]
