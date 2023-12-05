@@ -1,5 +1,0 @@
-FROM golang:1.21.0
-
-RUN mkdir hello && cd hello
-COPY hello.go /go/hello
-CMD [ "go", "run", "/go/hello/hello.go" ]
